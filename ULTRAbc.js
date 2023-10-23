@@ -10250,17 +10250,20 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
 
     CommandCombine([{
         Tag: 'timercell',
-        Description: "(minutes): stays in the isolation cell.",
+        Description: "(minutes): stays in the isolation cell (default 5 mins).",
         Action: (args) => {
-            var minutes = args;
-            ServerSend("ChatRoomChat", {
-                Content: "Beep",
-                Type: "Action",
-                Dictionary: [{
-                    Tag: "Beep",
-                    Text: "" + tmpname + " gets grabbed by two maids and locked in a timer cell for " + minutes + " minutes."
-                }]
-            });
+            let args = args.split(" ")
+            var minutes = args[0] === "" ? args[0] : 5;
+            if (args[1] != "silent") {
+                ServerSend("ChatRoomChat", {
+                    Content: "Beep",
+                    Type: "Action",
+                    Dictionary: [{
+                        Tag: "Beep",
+                        Text: "" + tmpname + " gets grabbed by two maids and locked in a timer cell for " + minutes + " minutes."
+                    }]
+                });
+            }
             DialogLentLockpicks = false;
             ChatRoomClearAllElements();
             ServerSend("ChatRoomLeave", "");
@@ -10273,7 +10276,8 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         Tag: 'title',
         Description: "(title): chooses a new title.",
         Action: (args) => {
-            if (args === "") {
+            let args = args.split(" ")
+            if (args.split(" ")[0] === "") {
                 ChatRoomSendLocal(
                     "<p style='background-color:#5fbd7a'><b>ULTRAbc</b>: The title command must be followed by a title.\n" +
                     "It will also change required parameters to get the title.\n" +
@@ -10294,7 +10298,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
                     "warlock, wildmustang, witch, wizard.</p>"
                 );
             } else {
-                var title = args;
+                var title = args[0];
                 if (title == "agent") {
                     if ((SkillGetLevel(Player, "Infiltration") < 6) || (SkillGetLevel(Player, "Infiltration") > 7)) {
                         SkillChange(Player, "Infiltration", 6);
@@ -10606,7 +10610,8 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         Tag: 'totalrelease',
         Description: "(target): removes all bindings, collar, harness, chastity, toys.",
         Action: (args) => {
-            if (args === "") {
+            let args = args.split(" ")
+            if (args.split(" ")[0] === "") {
                 if (Totalrelease == undefined) {
                     var message = "Magical lasers make disappear all bindings and toys on " + tmpname + "'s body."
                 } else {
@@ -10631,7 +10636,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
                 CharacterReleaseTotal(Player);
                 ChatRoomCharacterUpdate(Player);
             } else {
-                var targetname = args;
+                var targetname = args[0];
                 var target = ChatRoomCharacter.filter(A => (A.Name.toLowerCase().startsWith(targetname.toLowerCase())));
                 if (target[0] == null) {
                     var targetnumber = parseInt(targetname);
@@ -10656,14 +10661,16 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
                             var message = "Magical lasers make disappear all bindings and toys on " + tgpname + "'s body."
                         }
                     }
-                    ServerSend("ChatRoomChat", {
-                        Content: "Beep",
-                        Type: "Action",
-                        Dictionary: [{
-                            Tag: "Beep",
-                            Text: message
-                        }]
-                    });
+                    if (args[1] != "silent") {
+                        ServerSend("ChatRoomChat", {
+                            Content: "Beep",
+                            Type: "Action",
+                            Dictionary: [{
+                                Tag: "Beep",
+                                Text: message
+                            }]
+                        });
+                    }
                     CharacterReleaseTotal(target[0]);
                     ChatRoomCharacterUpdate(target[0]);
                     ChatRoomSetTarget(null);
