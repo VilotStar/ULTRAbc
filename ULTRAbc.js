@@ -1209,7 +1209,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
 
     //Photographic Room
     async function ULTRAPhotographicClick() {
-        modApi.hookFunction('PhotographicClick', 4, (args, next) => {            
+        modApi.hookFunction('PhotographicClick', 4, (args, next) => {
             if (SosbuttonsOn == true) {
                 if ((MouseX >= 0) && (MouseX < 45) && (MouseY >= 45) && (MouseY < 90)) {
                     CharacterReleaseTotal(Player);
@@ -1228,7 +1228,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
             next(args);
         });
     }
-   
+
     async function ULTRAPhotographicRun() {
         modApi.hookFunction('PhotographicRun', 4, (args, next) => {
             if (SosbuttonsOn == true) {
@@ -2446,7 +2446,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
             /*if (data.Content.includes("Inject")) {
                 if (!Player?.MemberNumber) return;
                 let mtarget = data.Dictionary.find(obj => obj.TargetCharacter)?.TargetCharacter;
-                mtarget ||= data.Dictionary.find(obj => obj.Tag === "TargetCharacter")?.MemberNumber; 
+                mtarget ||= data.Dictionary.find(obj => obj.Tag === "TargetCharacter")?.MemberNumber;
                 if (mtarget !== Player.MemberNumber) return;
                 var msg = ElementValue("InputChat");
                 if (Player.OnlineSettings.LSCG != null) {
@@ -3129,7 +3129,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
 
     //////////////////////////////////////////////////////////
     //BC-Diaper-Wetter
-    //////////////////////////////////////////////////////////	
+    //////////////////////////////////////////////////////////
 
     // A simple table for the colors that the script will use.
     DiaperUseLevels = [
@@ -3590,7 +3590,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
     // Body function
     // If the baby uses their diaper, it will make the front of their diaper look like it's been used
     function diaperTick() {
-        // Handle modifiers 
+        // Handle modifiers
         DiaperUseMessages = {
             "MessInner": " has messed " + pronoun3 + " inner diaper.",
             "MessInnerFully": " has fully messed " + pronoun3 + " inner diaper.",
@@ -3754,7 +3754,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         ChatRoomCharacterUpdate(Player);
     }
 
-    ///////////////////////////////////////////////////////////////				
+    ///////////////////////////////////////////////////////////////
     //Commands
 
     CommandCombine([{
@@ -8661,7 +8661,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
                             ChatRoomCharacterUpdate(Player);
                             DialogLeaveItemMenu();
                         }, 10000);
-                        // reset	 
+                        // reset
                     } else if (pose == "reset") {
                         CharacterSetActivePose(Player, null);
                         ChatRoomCharacterUpdate(Player);
@@ -10252,7 +10252,7 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         Tag: 'timercell',
         Description: "(minutes): stays in the isolation cell (default 5 mins).",
         Action: (args) => {
-            let args = args.split(" ")
+            args = args.split(" ")
             var minutes = args[0] === "" ? args[0] : 5;
             if (args[1] != "silent") {
                 ServerSend("ChatRoomChat", {
@@ -10276,8 +10276,8 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         Tag: 'title',
         Description: "(title): chooses a new title.",
         Action: (args) => {
-            let args = args.split(" ")
-            if (args.split(" ")[0] === "") {
+            args = args.split(" ")
+            if (args[0] === "") {
                 ChatRoomSendLocal(
                     "<p style='background-color:#5fbd7a'><b>ULTRAbc</b>: The title command must be followed by a title.\n" +
                     "It will also change required parameters to get the title.\n" +
@@ -10610,8 +10610,8 @@ var bcModSDK=function(){"use strict";const e="1.1.0";function o(e){alert("Mod ER
         Tag: 'totalrelease',
         Description: "(target): removes all bindings, collar, harness, chastity, toys.",
         Action: (args) => {
-            let args = args.split(" ")
-            if (args.split(" ")[0] === "") {
+            args = args.split(" ")
+            if (args[0] === "") {
                 if (Totalrelease == undefined) {
                     var message = "Magical lasers make disappear all bindings and toys on " + tmpname + "'s body."
                 } else {
